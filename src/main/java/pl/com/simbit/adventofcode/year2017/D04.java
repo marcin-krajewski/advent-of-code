@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.com.simbit.utility.file.FileReader;
-import pl.com.simbit.utility.problems.classes.CollectionUtils;
-import pl.com.simbit.utility.problems.string.StringUtils;
+import pl.com.simbit.utility.classes.CollectionUtils;
+import pl.com.simbit.utility.string.StringUtils;
 
 public class D04 implements Day {
 

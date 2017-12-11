@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import pl.com.simbit.utility.file.FileReader;
-import pl.com.simbit.utility.problems.classes.CollectionUtils;
+import pl.com.simbit.utility.classes.CollectionUtils;
 
 public class D06 implements Day {
 
@@ -36,7 +36,7 @@ public class D06 implements Day {
 			while (maxValue-- > 0) {
 				values[++stepIndex % values.length]++;
 			}
-			
+
 			int hashCode = Arrays.hashCode(values);
 			if (hashCodes.contains(hashCode)) {
 				return count - valueGetter.valueToSubtract(hashCodes, hashCode);
