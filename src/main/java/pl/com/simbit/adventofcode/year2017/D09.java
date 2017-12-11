@@ -17,17 +17,7 @@ public class D09 implements Day {
 	@Override
 	public Object problem1() {
 
-		String input = FileReader.readLines(StreamReader.readFile(file)).get(0);
-
-		Pattern p = Pattern.compile(selfResetted);
-		Matcher m = p.matcher(input);
-		while (m.find()) {
-			input = m.replaceFirst("$1$4");
-			m = p.matcher(input);
-		}
-
-		input = input.replaceAll(garbageIncorrectEndRegex, "");
-		input = input.replaceAll(garbageRegex, "");
+		String input = inputWithCorrectGarbages().replaceAll(garbageRegex, "");
 
 		int level = 0;
 		int sum = 0;
@@ -47,6 +37,21 @@ public class D09 implements Day {
 
 	@Override
 	public Object problem2() {
+
+		String input = inputWithCorrectGarbages();
+
+		int sum = 0;
+
+		Pattern p = Pattern.compile(garbageRegex);
+		Matcher m = p.matcher(input);
+		while (m.find()) {
+			sum += m.group().length() - 2;
+		}
+
+		return sum;
+	}
+
+	private String inputWithCorrectGarbages() {
 		String input = FileReader.readLines(StreamReader.readFile(file)).get(0);
 
 		Pattern p = Pattern.compile(selfResetted);
@@ -57,16 +62,6 @@ public class D09 implements Day {
 		}
 
 		input = input.replaceAll(garbageIncorrectEndRegex, "");
-		input = input.replaceAll(resetted, "");
-
-		int sum = 0;
-
-		p = Pattern.compile(garbageRegex);
-		m = p.matcher(input);
-		while (m.find()) {
-			sum += m.group().length() - 2;
-		}
-
-		return sum;
+		return input.replaceAll(resetted, "");
 	}
 }

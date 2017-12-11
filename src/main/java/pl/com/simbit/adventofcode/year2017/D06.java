@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import pl.com.simbit.utility.file.FileReader;
+import pl.com.simbit.utility.problems.classes.CollectionUtils;
 
 public class D06 implements Day {
 
@@ -20,48 +21,43 @@ public class D06 implements Day {
 	}
 
 	private Integer resolve(ValueGetter valueGetter) {
-		ArrayList<Integer> hashCodes = new ArrayList<Integer>();
 
-		List<Integer> numbers = FileReader.readNumberMatrix(StreamReader.readFile(file)).get(0);
-		Integer[] values = numbers.toArray(new Integer[0]);
+		Integer[] values = CollectionUtils.array(FileReader.readNumberMatrix(StreamReader.readFile(file)).get(0));
 
+		List<Integer> hashCodes = new ArrayList<Integer>();
 		int count = 0;
 		while (true) {
 			List<Integer> integers = Arrays.asList(values);
-			Integer value = Collections.max(integers);
-			int stepIndex = integers.indexOf(value);
+			Integer maxValue = Collections.max(integers);
+			int stepIndex = integers.indexOf(maxValue);
+
 			values[stepIndex] = 0;
 			count++;
-			while (value > 0) {
-				stepIndex++;
-				if (stepIndex == values.length) {
-					stepIndex = 0;
-				}
-				value--;
-				values[stepIndex]++;
+			while (maxValue-- > 0) {
+				values[++stepIndex % values.length]++;
 			}
-			if (hashCodes.contains(Arrays.hashCode(values))) {
-				return count - valueGetter.valueToSubtract(hashCodes, values);
+			
+			int hashCode = Arrays.hashCode(values);
+			if (hashCodes.contains(hashCode)) {
+				return count - valueGetter.valueToSubtract(hashCodes, hashCode);
 			}
-			hashCodes.add(Arrays.hashCode(values));
+			hashCodes.add(hashCode);
 		}
 	}
 
 	interface ValueGetter {
-		int valueToSubtract(ArrayList<Integer> hashCodes, Integer[] values);
-	}
-
-	class P1 implements ValueGetter {
-
-		public int valueToSubtract(ArrayList<Integer> hashCodes, Integer[] values) {
+		default int valueToSubtract(List<Integer> listValues, int value) {
 			return 0;
 		}
 	}
 
+	class P1 implements ValueGetter {
+	}
+
 	class P2 implements ValueGetter {
 
-		public int valueToSubtract(ArrayList<Integer> hashCodes, Integer[] values) {
-			return hashCodes.indexOf(Arrays.hashCode(values)) + 1;
+		public int valueToSubtract(List<Integer> listValues, int value) {
+			return listValues.indexOf(value) + 1;
 		}
 	}
 }

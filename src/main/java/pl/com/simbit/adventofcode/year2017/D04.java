@@ -1,11 +1,11 @@
 package pl.com.simbit.adventofcode.year2017;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import pl.com.simbit.utility.file.FileReader;
+import pl.com.simbit.utility.problems.classes.CollectionUtils;
+import pl.com.simbit.utility.problems.string.StringUtils;
 
 public class D04 implements Day {
 
@@ -14,7 +14,7 @@ public class D04 implements Day {
 	public Object problem1() {
 		int count = 0;
 		for (List<String> strings : FileReader.readMatrix(StreamReader.readFile(file), " ")) {
-			if (strings.size() == new HashSet<String>(strings).size()) {
+			if (CollectionUtils.hasUniqueElements(strings)) {
 				count++;
 			}
 		}
@@ -24,18 +24,19 @@ public class D04 implements Day {
 	public Object problem2() {
 		int count = 0;
 		for (List<String> strings : FileReader.readMatrix(StreamReader.readFile(file), " ")) {
-
-			List<String> newStrings = new ArrayList<String>();
-			for (String s : strings) {
-				char[] chars = s.toCharArray();
-				Arrays.sort(chars);
-				newStrings.add(new String(chars));
-			}
-			if (newStrings.size() == new HashSet<String>(newStrings).size()) {
+			if (CollectionUtils.hasUniqueElements(ordered(strings))) {
 				count++;
 			}
 		}
 		return count;
+	}
+
+	private List<String> ordered(List<String> strings) {
+		List<String> newStrings = new ArrayList<String>();
+		for (String s : strings) {
+			newStrings.add(StringUtils.getInstance().sortCharsInStringAlphabetically(s));
+		}
+		return newStrings;
 	}
 
 }
