@@ -1,4 +1,4 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

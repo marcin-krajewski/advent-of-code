@@ -1,4 +1,4 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 public interface Day {
 	Object problem1();

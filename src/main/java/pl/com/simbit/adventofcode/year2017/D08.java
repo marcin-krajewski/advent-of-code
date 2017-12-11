@@ -1,11 +1,11 @@
-package pl.com.simbit.year2017;
-
-import org.apache.commons.lang3.math.NumberUtils;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import pl.com.simbit.utility.file.FileReader;
 
 public class D08 implements Day {
 
@@ -74,7 +74,7 @@ public class D08 implements Day {
 	@Override
 	public Object problem1() {
 
-		List<String> lines = FileReader.readLines(file);
+		List<String> lines = FileReader.readLines(StreamReader.readFile(file));
 		Values values = new Values();
 		for (String line : lines) {
 			Condition c = new Condition(line.split(" if ")[1].trim());
@@ -87,7 +87,7 @@ public class D08 implements Day {
 
 	@Override
 	public Object problem2() {
-		List<String> lines = FileReader.readLines(file);
+		List<String> lines = FileReader.readLines(StreamReader.readFile(file));
 		Values values = new Values();
 		for (String line : lines) {
 			Condition c = new Condition(line.split(" if ")[1].trim());

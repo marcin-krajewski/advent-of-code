@@ -1,10 +1,12 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.Collections;
 import java.util.List;
 
+import pl.com.simbit.utility.file.FileReader;
+
 public class D02 implements Day {
-	private String p2file = "d02-input.txt";
+	private String file = "d02-input.txt";
 
 	public Object problem1() {
 		return checksum(new NumbersProblem1());
@@ -12,7 +14,7 @@ public class D02 implements Day {
 
 	private int checksum(MatchingNumbers matchingNumbers) {
 		int checksum = 0;
-		for (List<Integer> list : FileReader.readNumberMatrix(p2file)) {
+		for (List<Integer> list : FileReader.readNumberMatrix(StreamReader.readFile(file))) {
 			int[] numbers = matchingNumbers.numbers(list);
 			checksum += matchingNumbers.expression(numbers);
 		}

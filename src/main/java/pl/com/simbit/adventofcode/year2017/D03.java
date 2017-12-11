@@ -1,6 +1,4 @@
-package pl.com.simbit.year2017;
-
-import org.apache.commons.collections4.map.MultiKeyMap;
+package pl.com.simbit.adventofcode.year2017;
 
 public class D03 implements Day {
 

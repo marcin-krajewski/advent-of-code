@@ -1,11 +1,13 @@
-package pl.com.simbit.year2017;
-
-import org.junit.Assert;
-import org.junit.Test;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import pl.com.simbit.utility.file.FileReader;
 
 public class D10 implements Day {
 
@@ -19,7 +21,7 @@ public class D10 implements Day {
 		for (int i = 0; i < array.length; i++) {
 			array[i] = i;
 		}
-		List<Integer> order = FileReader.readNumberMatrixForSeparator(file, ",").get(0);
+		List<Integer> order = FileReader.readNumberMatrixForSeparator(StreamReader.readFile(file), ",").get(0);
 
 		int skipIndex = 0;
 		int currentIndex = 0;
@@ -51,7 +53,7 @@ public class D10 implements Day {
 	@Override
 	public Object problem2() {
 
-		String input = FileReader.firstLine(file);
+		String input = FileReader.firstLine(StreamReader.readFile(file));
 
 		int[] array = getRecalculatedArray(input);
 		List<Integer> list = getEach16Xor(array);

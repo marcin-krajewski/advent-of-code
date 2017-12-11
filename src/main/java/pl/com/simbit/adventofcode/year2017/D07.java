@@ -1,4 +1,4 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import org.apache.commons.collections4.MapUtils;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.simbit.utility.file.FileReader;
 
 @Builder
 @Getter
@@ -77,7 +78,7 @@ public class D07 implements Day {
 
 	public Object problem1() {
 
-		List<String> lines = FileReader.readLines(file);
+		List<String> lines = FileReader.readLines(StreamReader.readFile(file));
 
 		Map<String, Integer> counts = new HashMap<>();
 
@@ -109,7 +110,7 @@ public class D07 implements Day {
 	public Object problem2() {
 		Map<String, String> towers = new HashMap<>();
 
-		List<String> lines = FileReader.readLines(file);
+		List<String> lines = FileReader.readLines(StreamReader.readFile(file));
 		for (String s : lines) {
 			towers.put(s.substring(0, s.indexOf(" ")), s);
 		}

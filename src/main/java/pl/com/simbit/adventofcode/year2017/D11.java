@@ -1,9 +1,11 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
+
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
+import pl.com.simbit.utility.file.FileReader;
 
 public class D11 implements Day {
 
@@ -11,7 +13,7 @@ public class D11 implements Day {
 
 	@Override
 	public Object problem1() {
-		List<String> directions = FileReader.readMatrix(file, ",").get(0);
+		List<String> directions = FileReader.readMatrix(StreamReader.readFile(file), ",").get(0);
 
 		int currx = 0, curry = 0;
 		for (String direction : directions) {
@@ -58,7 +60,7 @@ public class D11 implements Day {
 	@Override
 	public Object problem2() {
 		int max = Integer.MIN_VALUE;
-		List<String> directions = FileReader.readMatrix(file, ",").get(0);
+		List<String> directions = FileReader.readMatrix(StreamReader.readFile(file), ",").get(0);
 
 		int currx = 0, curry = 0;
 		for (String direction : directions) {

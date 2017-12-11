@@ -1,7 +1,9 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import pl.com.simbit.utility.file.FileReader;
 
 public class D09 implements Day {
 
@@ -15,7 +17,7 @@ public class D09 implements Day {
 	@Override
 	public Object problem1() {
 
-		String input = FileReader.readLines(file).get(0);
+		String input = FileReader.readLines(StreamReader.readFile(file)).get(0);
 
 		Pattern p = Pattern.compile(selfResetted);
 		Matcher m = p.matcher(input);
@@ -45,7 +47,7 @@ public class D09 implements Day {
 
 	@Override
 	public Object problem2() {
-		String input = FileReader.readLines(file).get(0);
+		String input = FileReader.readLines(StreamReader.readFile(file)).get(0);
 
 		Pattern p = Pattern.compile(selfResetted);
 		Matcher m = p.matcher(input);

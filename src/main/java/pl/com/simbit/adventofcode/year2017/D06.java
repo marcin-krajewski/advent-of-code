@@ -1,9 +1,11 @@
-package pl.com.simbit.year2017;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import pl.com.simbit.utility.file.FileReader;
 
 public class D06 implements Day {
 
@@ -20,7 +22,7 @@ public class D06 implements Day {
 	private Integer resolve(ValueGetter valueGetter) {
 		ArrayList<Integer> hashCodes = new ArrayList<Integer>();
 
-		List<Integer> numbers = FileReader.readNumberMatrix(file).get(0);
+		List<Integer> numbers = FileReader.readNumberMatrix(StreamReader.readFile(file)).get(0);
 		Integer[] values = numbers.toArray(new Integer[0]);
 
 		int count = 0;

@@ -1,19 +1,19 @@
-package pl.com.simbit.year2017;
-
-import org.apache.commons.lang3.StringUtils;
+package pl.com.simbit.adventofcode.year2017;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import pl.com.simbit.utility.file.FileReader;
+
 public class D04 implements Day {
 
-	private String p4file = "d04-input.txt";
+	private String file = "d04-input.txt";
 
 	public Object problem1() {
 		int count = 0;
-		for (List<String> strings : FileReader.readMatrix(p4file, " ")) {
+		for (List<String> strings : FileReader.readMatrix(StreamReader.readFile(file), " ")) {
 			if (strings.size() == new HashSet<String>(strings).size()) {
 				count++;
 			}
@@ -23,7 +23,7 @@ public class D04 implements Day {
 
 	public Object problem2() {
 		int count = 0;
-		for (List<String> strings : FileReader.readMatrix(p4file, " ")) {
+		for (List<String> strings : FileReader.readMatrix(StreamReader.readFile(file), " ")) {
 
 			List<String> newStrings = new ArrayList<String>();
 			for (String s : strings) {
