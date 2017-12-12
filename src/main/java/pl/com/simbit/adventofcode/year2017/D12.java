@@ -24,21 +24,23 @@ public class D12 implements Day {
 	public Object problem2() {
 		Map<Integer, Set<Integer>> programs = readPrograms();
 		Map<Integer, Set<Integer>> groups = new HashMap<>();
-		for (Map.Entry<Integer, Set<Integer>> entry : programs.entrySet()) {
-			boolean omit = false;
-			for (Map.Entry<Integer, Set<Integer>> groupsEntry : groups.entrySet()) {
-				if (groupsEntry.getValue().contains(entry.getKey())) {
-					omit = true;
-					break;
-				}
-			}
-			if (omit) {
-				continue;
-			}
 
+		for (Map.Entry<Integer, Set<Integer>> entry : programs.entrySet()) {
+			if (anyGroupContainsCurrentId(groups, entry.getKey()))
+				continue;
 			groups.put(entry.getKey(), getProgramsOfGroup(programs, entry.getKey()));
 		}
+
 		return groups.size();
+	}
+
+	private boolean anyGroupContainsCurrentId(Map<Integer, Set<Integer>> groups, Integer id) {
+		for (Map.Entry<Integer, Set<Integer>> groupsEntry : groups.entrySet()) {
+			if (groupsEntry.getValue().contains(id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private Map<Integer, Set<Integer>> readPrograms() {
