@@ -1,5 +1,7 @@
 package pl.com.simbit.adventofcode.year2017;
 
+import pl.com.simbit.adventofcode.Day;
+
 public class D03 implements Day {
 
 	public Object problem1() {

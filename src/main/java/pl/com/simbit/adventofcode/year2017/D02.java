@@ -3,10 +3,12 @@ package pl.com.simbit.adventofcode.year2017;
 import java.util.Collections;
 import java.util.List;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D02 implements Day {
-	private String file = "d02-input.txt";
+	private String file = "year2017/d02-input.txt";
 
 	public Object problem1() {
 		return checksum(new NumbersProblem1());

@@ -1,4 +1,4 @@
-package pl.com.simbit.adventofcode.year2017;
+package pl.com.simbit.adventofcode;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -7,17 +7,25 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class App {
-	public static void main(String[] args) throws IOException {
+public class AdventOfCode {
 
-		if (args.length > 0) {
-			System.out.println("-------------------- DAY " + args[0] + " -------------------------");
-			runJsonProblem(args[0], args[1], null);
-			return;
-		}
+	private final Class mainClass;
 
-		LinkedHashMap<String, LinkedHashMap<String, Object>> result = new ObjectMapper()
-				.readValue(App.class.getResourceAsStream("answers.json"), LinkedHashMap.class);
+	public AdventOfCode(Class mainClass) {
+		this.mainClass = mainClass;
+	}
+
+	public void runSingle(String day, String problem) {
+		System.out.println("-------------------- DAY " + day + " -------------------------");
+		runJsonProblem(day, problem, null);
+	}
+
+	public void runAll() throws IOException {
+
+		LinkedHashMap<String, LinkedHashMap<String, Object>> result = new ObjectMapper().readValue(
+				AdventOfCode.class.getResourceAsStream(mainClass.getPackage().getName()
+						.substring(mainClass.getPackage().getName().lastIndexOf(".") + 1) + "/answers.json"),
+				LinkedHashMap.class);
 
 		for (Map.Entry<String, LinkedHashMap<String, Object>> entry : result.entrySet()) {
 			System.out.println("-------------------- DAY " + entry.getKey() + " -------------------------");
@@ -27,9 +35,9 @@ public class App {
 		}
 	}
 
-	private static void runJsonProblem(String className, String problem, Object expectedValue) {
+	private void runJsonProblem(String className, String problem, Object expectedValue) {
 		try {
-			Class<?> c = Class.forName(App.class.getPackage().getName() + "." + className);
+			Class<?> c = Class.forName(mainClass.getPackage().getName() + "." + className);
 			Object o = c.getConstructors()[0].newInstance();
 			Object problemValue = c.getMethod(problem).invoke(o);
 

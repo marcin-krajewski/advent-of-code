@@ -5,12 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 import pl.com.simbit.utility.classes.CollectionUtils;
 
 public class D06 implements Day {
 
-	private String file = "d06-input.txt";
+	private String file = "year2017/d06-input.txt";
 
 	public Object problem1() {
 		return resolve(new P1());

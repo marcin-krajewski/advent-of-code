@@ -3,11 +3,13 @@ package pl.com.simbit.adventofcode.year2017;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D01 implements Day {
 
-	private String file = "d01-input.txt";
+	private String file = "year2017/d01-input.txt";
 
 	public Object problem1() {
 		return countMatches(FileReader.fileAsDigits(StreamReader.readFile(file)), 1);

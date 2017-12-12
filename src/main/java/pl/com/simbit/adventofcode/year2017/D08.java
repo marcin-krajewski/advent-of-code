@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D08 implements Day {
@@ -69,7 +71,7 @@ public class D08 implements Day {
 		}
 	}
 
-	private String file = "d08-input.txt";
+	private String file = "year2017/d08-input.txt";
 
 	@Override
 	public Object problem1() {

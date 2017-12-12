@@ -8,11 +8,13 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D12 implements Day {
 
-	private String file = "d12-input.txt";
+	private String file = "year2017/d12-input.txt";
 
 	@Override
 	public Object problem1() {

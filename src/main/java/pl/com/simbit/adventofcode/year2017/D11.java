@@ -5,11 +5,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D11 implements Day {
 
-	private String file = "d11-input.txt";
+	private String file = "year2017/d11-input.txt";
 
 	@Override
 	public Object problem1() {

@@ -3,13 +3,15 @@ package pl.com.simbit.adventofcode.year2017;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 import pl.com.simbit.utility.classes.CollectionUtils;
 import pl.com.simbit.utility.string.StringUtils;
 
 public class D04 implements Day {
 
-	private String file = "d04-input.txt";
+	private String file = "year2017/d04-input.txt";
 
 	public Object problem1() {
 		int count = 0;

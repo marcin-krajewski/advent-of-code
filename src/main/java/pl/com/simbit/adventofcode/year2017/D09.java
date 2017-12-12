@@ -3,11 +3,13 @@ package pl.com.simbit.adventofcode.year2017;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D09 implements Day {
 
-	private String file = "d09-input.txt";
+	private String file = "year2017/d09-input.txt";
 
 	private String selfResetted = "([^!])((!!)+)([^!])";
 	private String garbageIncorrectEndRegex = "(!!)?!>";

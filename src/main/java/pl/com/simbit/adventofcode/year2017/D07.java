@@ -10,6 +10,8 @@ import org.apache.commons.collections4.MapUtils;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.simbit.adventofcode.Day;
+import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 @Builder
@@ -74,7 +76,7 @@ class Tower {
 
 public class D07 implements Day {
 
-	private String file = "d07-input.txt";
+	private String file = "year2017/d07-input.txt";
 
 	public Object problem1() {
 
