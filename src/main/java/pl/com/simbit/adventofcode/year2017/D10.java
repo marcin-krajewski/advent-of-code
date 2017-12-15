@@ -54,9 +54,11 @@ public class D10 implements Day {
 
 	@Override
 	public Object problem2() {
-
 		String input = FileReader.firstLine(StreamReader.readFile(file));
+		return knotHash(input);
+	}
 
+	public String knotHash(String input) {
 		int[] array = getRecalculatedArray(input);
 		List<Integer> list = getEach16Xor(array);
 		return hashes(list);
@@ -105,11 +107,16 @@ public class D10 implements Day {
 	}
 
 	private List<Integer> order(String input) {
+		List<Integer> list = ascii(input);
+		list.addAll(Arrays.asList(17, 31, 73, 47, 23));
+		return list;
+	}
+
+	public List<Integer> ascii(String input) {
 		List<Integer> list = new ArrayList<>();
 		for (int i = 0; i < input.length(); i++) {
 			list.add(getAscii(input.charAt(i)));
 		}
-		list.addAll(Arrays.asList(17, 31, 73, 47, 23));
 		return list;
 	}
 
