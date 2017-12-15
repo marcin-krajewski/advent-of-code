@@ -1,3 +1,5 @@
 .idea/
 aoc.iml
 target/
+out/
+src/main/java/META-INF/

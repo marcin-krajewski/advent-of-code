@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Stopwatch;
 
 public class AdventOfCode {
 
@@ -32,6 +34,7 @@ public class AdventOfCode {
 			for (Map.Entry<String, Object> problemEntry : entry.getValue().entrySet()) {
 				runJsonProblem(entry.getKey(), problemEntry.getKey(), problemEntry.getValue());
 			}
+			System.out.println();
 		}
 	}
 
@@ -39,9 +42,13 @@ public class AdventOfCode {
 		try {
 			Class<?> c = Class.forName(mainClass.getPackage().getName() + "." + className);
 			Object o = c.getConstructors()[0].newInstance();
+
+			Stopwatch stopwatch = Stopwatch.createStarted();
 			Object problemValue = c.getMethod(problem).invoke(o);
 
-			System.out.println(className + "-" + problem + " = " + problemValue);
+			System.out.format("%20s%40s%30s", className + "-" + problem, problemValue,
+					millisToPrint(stopwatch.elapsed(TimeUnit.MILLISECONDS)));
+			System.out.println();
 			assert problemValue.equals(expectedValue) : "Incorrect problem result";
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -54,5 +61,9 @@ public class AdventOfCode {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private String millisToPrint(long millis) {
+		return (millis > 2000 ? " \033[0;31m" : "\033[0;32m") + millis + " ms" + "\033[0m";
 	}
 }
