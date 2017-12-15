@@ -8,7 +8,7 @@ import pl.com.simbit.utility.file.FileReader;
 
 public class D02 implements Day {
 
-	private String file = "year2016/d02-input.txt";
+	private String file = "year2016/d02.txt";
 	int size = 3;
 
 	@Override

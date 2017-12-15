@@ -6,7 +6,6 @@ import static pl.com.simbit.adventofcode.year2016.D01.Direction.S;
 import static pl.com.simbit.adventofcode.year2016.D01.Direction.W;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.com.simbit.adventofcode.Day;
@@ -19,7 +18,7 @@ public class D01 implements Day {
 		N, S, W, E
 	}
 
-	private String file = "year2016/d01-input.txt";
+	private String file = "year2016/d01.txt";
 
 	@Override
 	public Object problem1() {
