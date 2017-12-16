@@ -56,7 +56,12 @@
     "problem2": 1180
   },
   "D15": {
+    "avoid": true,
     "problem1": 577,
     "problem2": 316
+  },
+  "D16": {
+    "problem1": "nlciboghjmfdapek",
+    "problem2": "nlciboghmkedpfja"
   }
 }

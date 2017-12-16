@@ -30,6 +30,12 @@ public class AdventOfCode {
 				LinkedHashMap.class);
 
 		for (Map.Entry<String, LinkedHashMap<String, Object>> entry : result.entrySet()) {
+			if (entry.getValue().containsKey("avoid") && entry.getValue().get("avoid").equals(true)) {
+				System.out
+						.println(" OMITTING ---------- DAY " + entry.getKey() + " -------------------------");
+				System.out.println();
+				continue;
+			}
 			System.out.println("-------------------- DAY " + entry.getKey() + " -------------------------");
 			for (Map.Entry<String, Object> problemEntry : entry.getValue().entrySet()) {
 				runJsonProblem(entry.getKey(), problemEntry.getKey(), problemEntry.getValue());
