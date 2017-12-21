@@ -14,7 +14,7 @@ import pl.com.simbit.utility.file.FileReader;
 
 public class D01 implements Day {
 
-	enum Direction {
+	public enum Direction {
 		N, S, W, E
 	}
 
