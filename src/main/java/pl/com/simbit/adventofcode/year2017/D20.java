@@ -9,7 +9,7 @@ import java.util.List;
 
 public class D20 implements Day {
 
-	private String file = "year2017/d20-input.txt";
+	private String file = "year2017/d20.txt";
 
 	@Override
 	public Object problem1() {

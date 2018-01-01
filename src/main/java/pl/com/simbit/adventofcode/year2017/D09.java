@@ -9,7 +9,7 @@ import pl.com.simbit.utility.file.FileReader;
 
 public class D09 implements Day {
 
-	private String file = "year2017/d09-input.txt";
+	private String file = "year2017/d09.txt";
 
 	private String selfResetted = "([^!])((!!)+)([^!])";
 	private String garbageIncorrectEndRegex = "(!!)?!>";

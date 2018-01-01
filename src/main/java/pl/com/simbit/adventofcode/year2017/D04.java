@@ -11,7 +11,7 @@ import pl.com.simbit.utility.string.StringUtils;
 
 public class D04 implements Day {
 
-	private String file = "year2017/d04-input.txt";
+	private String file = "year2017/d04.txt";
 
 	public Object problem1() {
 		int count = 0;

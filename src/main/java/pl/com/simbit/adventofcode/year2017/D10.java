@@ -15,7 +15,7 @@ public class D10 implements Day {
 
 	private int size = 256;
 
-	private String file = "year2017/d10-input.txt";
+	private String file = "year2017/d10.txt";
 
 	@Override
 	public Object problem1() {

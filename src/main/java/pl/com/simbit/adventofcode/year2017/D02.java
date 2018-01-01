@@ -8,7 +8,7 @@ import pl.com.simbit.adventofcode.utility.StreamReader;
 import pl.com.simbit.utility.file.FileReader;
 
 public class D02 implements Day {
-	private String file = "year2017/d02-input.txt";
+	private String file = "year2017/d02.txt";
 
 	public Object problem1() {
 		return checksum(new NumbersProblem1());

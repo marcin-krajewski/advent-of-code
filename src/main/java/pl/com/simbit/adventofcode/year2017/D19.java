@@ -9,7 +9,7 @@ import java.util.List;
 
 public class D19 implements Day {
 
-	private String file = "year2017/d19-input.txt";
+	private String file = "year2017/d19.txt";
 
 	@Override
 	public Object problem1() {
@@ -27,7 +27,6 @@ public class D19 implements Day {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		printChars(xy, chars);
 		while (true) {
 			// try {
 			// Thread.sleep(250);
@@ -141,7 +140,6 @@ public class D19 implements Day {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		printChars(xy, chars);
 		int count = 1;
 		while (true) {
 			// try {

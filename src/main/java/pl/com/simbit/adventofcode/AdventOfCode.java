@@ -31,8 +31,7 @@ public class AdventOfCode {
 
 		for (Map.Entry<String, LinkedHashMap<String, Object>> entry : result.entrySet()) {
 			if (entry.getValue().containsKey("avoid") && entry.getValue().get("avoid").equals(true)) {
-				System.out
-						.println(" OMITTING ---------- DAY " + entry.getKey() + " -------------------------");
+				System.out.println(" OMITTING ---------- DAY " + entry.getKey() + " -------------------------");
 				System.out.println();
 				continue;
 			}
@@ -55,7 +54,8 @@ public class AdventOfCode {
 			System.out.format("%20s%40s%30s", className + "-" + problem, problemValue,
 					millisToPrint(stopwatch.elapsed(TimeUnit.MILLISECONDS)));
 			System.out.println();
-			assert problemValue.equals(expectedValue) : "Incorrect problem result";
+			assert problemValue.equals(expectedValue) || problemValue == expectedValue : "Incorrect problem result. Given: " + problemValue
+					+ ", expected: " + expectedValue;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {

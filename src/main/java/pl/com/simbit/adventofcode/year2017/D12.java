@@ -14,7 +14,7 @@ import pl.com.simbit.utility.file.FileReader;
 
 public class D12 implements Day {
 
-	private String file = "year2017/d12-input.txt";
+	private String file = "year2017/d12.txt";
 
 	@Override
 	public Object problem1() {

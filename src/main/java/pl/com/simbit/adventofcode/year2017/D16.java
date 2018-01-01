@@ -13,7 +13,7 @@ import java.util.List;
 
 public class D16 implements Day {
 
-	private String file = "year2017/d16-input.txt";
+	private String file = "year2017/d16.txt";
 	private String start = "abcdefghijklmnop";
 	private Factory factory = new Factory();
 

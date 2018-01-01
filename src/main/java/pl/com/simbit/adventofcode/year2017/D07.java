@@ -76,7 +76,7 @@ class Tower {
 
 public class D07 implements Day {
 
-	private String file = "year2017/d07-input.txt";
+	private String file = "year2017/d07.txt";
 
 	public Object problem1() {
 

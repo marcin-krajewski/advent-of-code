@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class D18 implements Day {
 
-	private String file = "year2017/d18-input.txt";
+	private String file = "year2017/d18.txt";
 
 	@Override
 	public Object problem1() {
@@ -34,7 +34,7 @@ public class D18 implements Day {
 			Operation o = operations.get(currentOperation);
 			long value = o.setValue(values);
 			if (o instanceof Rcv && value != 0) {
-				return last;
+				return last + "";
 			}
 			if (o instanceof Snd || o instanceof Sndr) {
 				last = value;

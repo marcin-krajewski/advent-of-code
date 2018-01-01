@@ -21,7 +21,7 @@ public class D05 implements Day {
 		}
 	}
 
-	private String file = "year2017/d05-input.txt";
+	private String file = "year2017/d05.txt";
 
 	public Object problem1() {
 		return count(new P1());

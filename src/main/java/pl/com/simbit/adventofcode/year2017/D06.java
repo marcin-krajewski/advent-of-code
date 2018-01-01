@@ -12,7 +12,7 @@ import pl.com.simbit.utility.classes.CollectionUtils;
 
 public class D06 implements Day {
 
-	private String file = "year2017/d06-input.txt";
+	private String file = "year2017/d06.txt";
 
 	public Object problem1() {
 		return resolve(new P1());
