@@ -97,7 +97,7 @@ public class D18 implements Day {
 
 	}
 
-	Operation factory(String operationName, String[] line) {
+	public Operation factory(String operationName, String[] line) {
 		switch (operationName) {
 		case "snd":
 			try {
@@ -126,6 +126,25 @@ public class D18 implements Day {
 				return new Add(line[1], Long.parseLong(line[2]));
 			} catch (NumberFormatException ex) {
 				return new Addr(line[1], line[2]);
+			}
+		case "sub":
+			try {
+				Long.parseLong(line[2]);
+				return new Sub(line[1], Long.parseLong(line[2]));
+			} catch (NumberFormatException ex) {
+				return new Subr(line[1], line[2]);
+			}
+		case "jnz":
+			try {
+				Long.parseLong(line[1]);
+				return new Jnzi(Integer.parseInt(line[1]), Integer.parseInt(line[2]));
+			} catch (NumberFormatException ex) {
+				try {
+					Long.parseLong(line[2]);
+					return new Jnz(line[1], Integer.parseInt(line[2]));
+				} catch (NumberFormatException ex2) {
+					return new Jnzr(line[1], line[2]);
+				}
 			}
 		case "mod":
 			try {
@@ -395,6 +414,66 @@ public class D18 implements Day {
 		Assert.assertEquals(Long.valueOf(1), values.get("b"));
 	}
 
+	class Sub implements Operation {
+		private final long value;
+		private final String register;
+
+		public Sub(String register, long value) {
+			this.register = register;
+			this.value = value;
+		}
+
+		@Override
+		public long setValue(Map<String, Long> registers) {
+			long oldValue = getValue(registers, register);
+			registers.put(register, oldValue - this.value);
+			return oldValue - this.value;
+		}
+	}
+
+	@Test
+	public void sub() {
+		Map<String, Long> values = new HashMap<>();
+		values.put("a", 1L);
+		Assert.assertEquals(-10, new Sub("b", 10).setValue(values));
+		Assert.assertEquals(-8, new Sub("b", -2).setValue(values));
+		Assert.assertEquals(-13, new Sub("b", 5).setValue(values));
+		Assert.assertEquals(-4, new Sub("a", 5).setValue(values));
+		Assert.assertEquals(-9, new Sub("a", 5).setValue(values));
+		Assert.assertEquals(Long.valueOf(-9), values.get("a"));
+		Assert.assertEquals(Long.valueOf(-13), values.get("b"));
+	}
+
+	class Subr implements Operation {
+		private final String value;
+		private final String register;
+
+		public Subr(String register, String value) {
+			this.register = register;
+			this.value = value;
+		}
+
+		@Override
+		public long setValue(Map<String, Long> registers) {
+			long newValue = getValue(registers, register) - getValue(registers, this.value);
+			registers.put(register, newValue);
+			return newValue;
+		}
+	}
+
+	@Test
+	public void subr() {
+		Map<String, Long> values = new HashMap<>();
+		values.put("a", 1L);
+		Assert.assertEquals(0, new Subr("b", "b").setValue(values));
+		Assert.assertEquals(-1, new Subr("b", "a").setValue(values));
+		Assert.assertEquals(2, new Subr("a", "b").setValue(values));
+		Assert.assertEquals(0, new Subr("a", "a").setValue(values));
+		Assert.assertEquals(0, new Subr("a", "c").setValue(values));
+		Assert.assertEquals(Long.valueOf(0), values.get("a"));
+		Assert.assertEquals(Long.valueOf(-1), values.get("b"));
+	}
+
 	class Mod implements Operation {
 		private final long value;
 		private final String register;
@@ -549,5 +628,122 @@ public class D18 implements Day {
 		Assert.assertSame(3, new Jgzr("a", "c").nextOperation(values, 2));
 		values.put("a", 1L);
 		Assert.assertSame(-1, new Jgzr("a", "c").nextOperation(values, 2));
+	}
+
+	// TODO: jgz error to jnz
+	class Jnz implements Operation {
+		private final int offset;
+		private final String register;
+
+		public Jnz(String register, int offset) {
+			this.register = register;
+			this.offset = offset;
+		}
+
+		@Override
+		public int nextOperation(Map<String, Long> registers, int previousOperation) {
+			if (getValue(registers, register) != 0)
+				return previousOperation + offset;
+			return Operation.super.nextOperation(registers, previousOperation);
+		}
+
+		@Override
+		public long setValue(Map<String, Long> registers) {
+			return 0;
+		}
+	}
+
+	class Jnzi implements Operation {
+		private final int offset;
+		private final int register;
+
+		public Jnzi(Integer register, int offset) {
+			this.register = register;
+			this.offset = offset;
+		}
+
+		@Override
+		public int nextOperation(Map<String, Long> registers, int previousOperation) {
+			if (register != 0)
+				return previousOperation + offset;
+			return Operation.super.nextOperation(registers, previousOperation);
+		}
+
+		@Override
+		public long setValue(Map<String, Long> registers) {
+			return 0;
+		}
+	}
+
+	@Test
+	public void jnz() {
+		Map<String, Long> values = new HashMap<>();
+		values.put("a", 0L);
+		Assert.assertSame(3, new Jnz("b", 3).nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(3, new Jnz("b", 3).nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(3, new Jnz("b", 3).nextOperation(values, 2));
+		values.put("a", 0L);
+		Assert.assertSame(3, new Jnz("a", 3).nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(5, new Jnz("a", 3).nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(5, new Jnz("a", 3).nextOperation(values, 2));
+		values.put("a", 0L);
+		Assert.assertSame(3, new Jnz("a", -3).nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(-1, new Jnz("a", -3).nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(-1, new Jnz("a", -3).nextOperation(values, 2));
+	}
+
+	class Jnzr implements Operation {
+		private final String value;
+		private final String register;
+
+		public Jnzr(String register, String value) {
+			this.register = register;
+			this.value = value;
+		}
+
+		@Override
+		public int nextOperation(Map<String, Long> registers, int previousOperation) {
+			if (getValue(registers, register) != 0)
+				return previousOperation + (int) getValue(registers, value);
+			return Operation.super.nextOperation(registers, previousOperation);
+		}
+
+		@Override
+		public long setValue(Map<String, Long> registers) {
+			return 0;
+		}
+	}
+
+	@Test
+	public void jnzr() {
+		Map<String, Long> values = new HashMap<>();
+		values.put("a", 0L);
+		values.put("c", 3L);
+		Assert.assertSame(3, new Jnzr("b", "c").nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(3, new Jnzr("b", "c").nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(3, new Jnzr("b", "c").nextOperation(values, 2));
+		values.put("a", 0L);
+		Assert.assertSame(3, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(5, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(5, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(5, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("c", -3L);
+		values.put("a", 0L);
+		Assert.assertSame(3, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("a", -1L);
+		Assert.assertSame(-1, new Jnzr("a", "c").nextOperation(values, 2));
+		values.put("a", 1L);
+		Assert.assertSame(-1, new Jnzr("a", "c").nextOperation(values, 2));
 	}
 }
