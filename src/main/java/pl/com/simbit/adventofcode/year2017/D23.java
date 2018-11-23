@@ -88,6 +88,7 @@ public class D23 implements Day {
 
 		int currentOperation = 0;
 		int c = 0;
+		int i=0;
 		while (true) {
 			if (currentOperation < 0 || currentOperation >= operations.size()) {
 				return values.get("h");
@@ -95,7 +96,10 @@ public class D23 implements Day {
 			D18.Operation o = operations.get(currentOperation);
 			long value = o.setValue(values);
 			currentOperation = o.nextOperation(values, currentOperation);
-			System.out.println(values);
+			i++;
+			if(i > 5000) {
+				System.out.println(values);
+			}
 		}
 	}
 }

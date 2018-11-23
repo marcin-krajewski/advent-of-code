@@ -223,7 +223,7 @@ public class D18 implements Day {
 			try {
 				return registers.get(register);
 			} catch (NullPointerException e) {
-				throw new RuntimeException();
+				return Integer.parseInt(register);
 			}
 		}
 	}
