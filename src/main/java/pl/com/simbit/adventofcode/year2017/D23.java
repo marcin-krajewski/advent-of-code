@@ -25,6 +25,22 @@ public class D23 implements Day {
 		}
 
 		Map<String, Long> values = new HashMap<>();
+		values.put("a", 0L);
+		values.put("b", 0L);
+		values.put("c", 0L);
+		values.put("d", 0L);
+		values.put("e", 0L);
+		values.put("f", 0L);
+		values.put("g", 0L);
+		values.put("h", 0L);
+		values.put("i", 0L);
+		values.put("j", 0L);
+		values.put("k", 0L);
+		values.put("l", 0L);
+		values.put("m", 0L);
+		values.put("n", 0L);
+		values.put("o", 0L);
+		values.put("p", 0L);
 
 		int currentOperation = 0;
 		int c = 0;
@@ -43,6 +59,43 @@ public class D23 implements Day {
 
 	@Override
 	public Object problem2() {
-		return null;
+		List<String> lines = FileReader.readLines(StreamReader.readFile(file));
+
+		List<D18.Operation> operations = new ArrayList<>();
+
+		long last = -1;
+		for (String line : lines) {
+			operations.add(new D18().factory(line.split(" ")[0], line.split(" ")));
+		}
+
+		Map<String, Long> values = new HashMap<>();
+		values.put("a", 1L);
+		values.put("b", 0L);
+		values.put("c", 0L);
+		values.put("d", 0L);
+		values.put("e", 0L);
+		values.put("f", 0L);
+		values.put("g", 0L);
+		values.put("h", 0L);
+		values.put("i", 0L);
+		values.put("j", 0L);
+		values.put("k", 0L);
+		values.put("l", 0L);
+		values.put("m", 0L);
+		values.put("n", 0L);
+		values.put("o", 0L);
+		values.put("p", 0L);
+
+		int currentOperation = 0;
+		int c = 0;
+		while (true) {
+			if (currentOperation < 0 || currentOperation >= operations.size()) {
+				return values.get("h");
+			}
+			D18.Operation o = operations.get(currentOperation);
+			long value = o.setValue(values);
+			currentOperation = o.nextOperation(values, currentOperation);
+			System.out.println(values);
+		}
 	}
 }

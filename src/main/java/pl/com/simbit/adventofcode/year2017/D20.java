@@ -9,112 +9,176 @@ import java.util.List;
 
 public class D20 implements Day {
 
-	private String file = "year2017/d20.txt";
+  private String file = "year2017/d20.txt";
 
-	@Override
-	public Object problem1() {
-		List<String> strings = FileReader.readLines(StreamReader.readFile(file));
+  @Override
+  public Object problem1() {
+    List<Points> points = readPoints();
 
-		List<Point[]> points = new ArrayList<>();
-		for (String line : strings) {
-			String[] pointsLine = line.split(", ");
+    long min = Long.MAX_VALUE;
+    Points minInd = null;
+    for (int j = 0; j < points.size(); j++) {
+      Points p = points.get(j);
+      int i = 0;
 
-			Point[] p = new Point[3];
-			for (int i = 0; i < pointsLine.length; i++) {
-				p[i] = getPoint(pointsLine[i].substring(pointsLine[i].indexOf("<") + 1, pointsLine[i].length() - 1));
-			}
-			points.add(p);
-		}
+      while (true) {
+        if (i == 3000) {
+          long distance = p.distance();
+          if (distance < min && distance > 0) {
+            min = distance;
+            minInd = p;
+          }
+          break;
+        }
+        p.increaseDistance();
+        if (i++ > 5000000) {
+          int b = i;
+        }
+      }
 
-		long min = Long.MAX_VALUE;
-		int minInd = -1;
-		for (int j = 0; j < points.size(); j++) {
-			Point[] p = points.get(j);
-			int i = 0;
-			while (true) {
-				// System.out.println("Ind: " + j);
-				// System.out.println("\tp: " + p[0]);
-				// System.out.println("\tv: " + p[1]);
-				// System.out.println("\ta: " + p[2]);
-				long distance = p[0].distance();
-				if (distance < min && distance > 0) {
-					// System.out.println("CHANGING MIN TO " + distance + ", point: " + p[0]);
-					min = distance;
-					minInd = j;
-				}
-				if (allPointsTheSameSign(p)) {
-					// System.out.println("Break pos: " + j);
-					break;
-				}
-				p[1].increase(p[2]);
-				p[0].increase(p[1]);
-				if (i++ > 5000000) {
-					int b = i;
-				}
-			}
-		}
-		System.out.println(min);
+    }
 
-		return minInd;
-	}
+    return minInd.ind;
+  }
 
-	private boolean allPointsTheSameSign(Point[] pp) {
-		Point p = pp[0];
-		Point v = pp[1];
-		Point a = pp[2];
-		if (p.x >= 0 && v.x >= 0 && a.x >= 0) {
-			return true;
-		}
-		if (p.x <= 0 && v.x <= 0 && a.x <= 0) {
-			return true;
-		}
-		if (p.y >= 0 && v.y >= 0 && a.y >= 0) {
-			return true;
-		}
-		if (p.y <= 0 && v.y <= 0 && a.y <= 0) {
-			return true;
-		}
+  Point getPoint(String coords) {
+    Point point = new Point();
+    point.x = Integer.parseInt(coords.split(",")[0]);
+    point.y = Integer.parseInt(coords.split(",")[1]);
+    point.z = Integer.parseInt(coords.split(",")[2]);
+    return point;
+  }
 
-		if (p.z >= 0 && v.z >= 0 && a.z >= 0) {
-			return true;
-		}
-		if (p.z <= 0 && v.z <= 0 && a.z <= 0) {
-			return true;
-		}
-		return false;
-	}
+  class Point {
 
-	Point getPoint(String coords) {
-		Point point = new Point();
-		point.x = Integer.parseInt(coords.split(",")[0]);
-		point.y = Integer.parseInt(coords.split(",")[1]);
-		point.z = Integer.parseInt(coords.split(",")[2]);
-		return point;
-	}
+    long x;
+    long y;
+    long z;
 
-	class Point {
-		long x;
-		long y;
-		long z;
+    long distance() {
+      return Math.abs(x) + Math.abs(y) + Math.abs(z);
+    }
 
-		long distance() {
-			return Math.abs(x) + Math.abs(y) + Math.abs(z);
-		}
+    void increase(Point p) {
+      x += p.x;
+      y += p.y;
+      z += p.z;
+    }
 
-		void increase(Point p) {
-			x += p.x;
-			y += p.y;
-			z += p.z;
-		}
+    @Override
+    public String toString() {
+      return "<" + x + ", " + y + ", " + z + ">";
+    }
+  }
 
-		@Override
-		public String toString() {
-			return "<" + x + ", " + y + ", " + z + ">";
-		}
-	}
+  class Points {
 
-	@Override
-	public Object problem2() {
-		return null;
-	}
+    boolean collides = false;
+
+    Long d = Long.MAX_VALUE;
+
+    Point p;
+    Point v;
+    Point a;
+
+    int ind = -1;
+
+    public void parse(String line) {
+      String[] pointsLine = line.split(", ");
+      p = getPoint(
+          pointsLine[0].substring(pointsLine[0].indexOf("<") + 1, pointsLine[0].length() - 1));
+      v = getPoint(
+          pointsLine[1].substring(pointsLine[1].indexOf("<") + 1, pointsLine[1].length() - 1));
+      a = getPoint(
+          pointsLine[2].substring(pointsLine[2].indexOf("<") + 1, pointsLine[2].length() - 1));
+      d = p.distance();
+    }
+
+    public long distance() {
+      return d;
+    }
+
+    public void increaseDistance() {
+      increaseVelocity();
+      p.increase(v);
+      d = p.distance();
+    }
+
+    public void increaseVelocity() {
+      v.increase(a);
+    }
+
+    public void collides(List<Points> pp) {
+      if (this.collides == true) {
+        return;
+      }
+      for (Points p : pp) {
+        if (p.ind == ind || p.collides == true) {
+          continue;
+        }
+        if (p.p.x == this.p.x && p.p.z == this.p.z && p.p.y == this.p.y) {
+          this.collides = true;
+          p.collides = true;
+        }
+      }
+    }
+
+    public String String() {
+      return "p=<" + p.x + "\t" + p.y + "\t" + p.z + ">, v=<" + v.x + "\t" + v.y + "\t" + v.z
+          + ">, a=<" + a.x + "\t" + a.y + "\t" + a.z + ">" + "\t\t\t\t" + p.x + "\t" + p.y + "\t"
+          + p.z + "\t" + v.x + "\t" + v.y + "\t" + v.z
+          + "\t" + a.x + "\t" + a.y + "\t" + a.z;
+    }
+  }
+
+  @Override
+  public Object problem2() {
+    List<Points> points = readPoints();
+
+    int i = 0;
+    while (true) {
+
+      for (int j = 0; j < points.size(); j++) {
+        Points p = points.get(j);
+        p.collides(points);
+      }
+
+      for (int j = 0; j < points.size(); j++) {
+        Points p = points.get(j);
+        p.increaseDistance();
+      }
+      i++;
+      if (i == 50) {
+        break;
+      }
+
+    }
+    i = 0;
+    for (int j = 0; j < points.size(); j++) {
+      Points p = points.get(j);
+      if (!p.collides) {
+        i++;
+      }
+    }
+
+    return i;
+  }
+
+  public List<Points> readPoints() {
+    List<String> strings = FileReader.readLines(StreamReader.readFile(file));
+
+    List<Points> points = new ArrayList<>();
+
+    int ii = 0;
+    for (String line : strings) {
+      String[] pointsLine = line.split(", ");
+
+      Points p = new Points();
+      p.parse(line);
+      p.ind = ii;
+      points.add(p);
+      ii++;
+    }
+    return points;
+  }
 }

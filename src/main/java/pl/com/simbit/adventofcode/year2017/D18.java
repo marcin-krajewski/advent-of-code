@@ -28,6 +28,22 @@ public class D18 implements Day {
 		}
 
 		Map<String, Long> values = new HashMap<>();
+		values.put("a", 0L);
+		values.put("b", 0L);
+		values.put("c", 0L);
+		values.put("d", 0L);
+		values.put("e", 0L);
+		values.put("f", 0L);
+		values.put("g", 0L);
+		values.put("h", 0L);
+		values.put("i", 0L);
+		values.put("j", 0L);
+		values.put("k", 0L);
+		values.put("l", 0L);
+		values.put("m", 0L);
+		values.put("n", 0L);
+		values.put("o", 0L);
+		values.put("p", 0L);
 
 		int currentOperation = 0;
 		while (true) {
@@ -55,8 +71,38 @@ public class D18 implements Day {
 		}
 
 		Map<String, Long> values0 = new HashMap<>();
+		values0.put("a", 0L);
+		values0.put("b", 0L);
+		values0.put("c", 0L);
+		values0.put("d", 0L);
+		values0.put("e", 0L);
+		values0.put("f", 0L);
+		values0.put("g", 0L);
+		values0.put("h", 0L);
+		values0.put("i", 0L);
+		values0.put("j", 0L);
+		values0.put("k", 0L);
+		values0.put("l", 0L);
+		values0.put("m", 0L);
+		values0.put("n", 0L);
+		values0.put("o", 0L);
 		values0.put("p", 0L);
 		Map<String, Long> values1 = new HashMap<>();
+		values1.put("a", 0L);
+		values1.put("b", 0L);
+		values1.put("c", 0L);
+		values1.put("d", 0L);
+		values1.put("e", 0L);
+		values1.put("f", 0L);
+		values1.put("g", 0L);
+		values1.put("h", 0L);
+		values1.put("i", 0L);
+		values1.put("j", 0L);
+		values1.put("k", 0L);
+		values1.put("l", 0L);
+		values1.put("m", 0L);
+		values1.put("n", 0L);
+		values1.put("o", 0L);
 		values1.put("p", 1L);
 		int count = 0;
 
@@ -174,7 +220,11 @@ public class D18 implements Day {
 		long setValue(Map<String, Long> registers);
 
 		default long getValue(Map<String, Long> registers, String register) {
-			return registers.get(register) == null ? 0 : registers.get(register);
+			try {
+				return registers.get(register);
+			} catch (NullPointerException e) {
+				throw new RuntimeException();
+			}
 		}
 	}
 
