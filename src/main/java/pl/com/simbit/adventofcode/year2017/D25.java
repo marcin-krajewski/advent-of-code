@@ -27,16 +27,16 @@ public class D25 implements Day {
     State F = new State();
 
     A.set0(1, 1, B);
-    A.set1(0, -1, C);
-    B.set0(1, -1, A);
-    B.set1(1, 1, D);
-    C.set0(0, -1, B);
-    C.set1(0, -1, E);
-    D.set0(1, 1, A);
-    D.set1(0, 1, B);
-    E.set0(1, -1, F);
+    A.set1(0, -1, E);
+    B.set0(1, -1, C);
+    B.set1(0, 1, A);
+    C.set0(1, -1, D);
+    C.set1(0, 1, C);
+    D.set0(1, -1, E);
+    D.set1(0, -1, F);
+    E.set0(1, -1, A);
     E.set1(1, -1, C);
-    F.set0(1, 1, D);
+    F.set0(1, -1, E);
     F.set1(1, 1, A);
 
     int index = movements;
