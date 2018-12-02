@@ -23,6 +23,16 @@ class Tower {
 	List<Tower> children = new ArrayList<>();
 	Tower parent;
 
+	@Override
+	public String toString() {
+		return "Tower{" +
+				"key='" + key + '\'' +
+				", weight=" + weight +
+				", parent=" + parent +
+				", children=" + children.size() +
+				'}';
+	}
+
 	void addChild(Tower tower) {
 		this.children.add(tower);
 	}
@@ -64,7 +74,7 @@ class Tower {
 
 	public Tower getSingleCorrect() {
 		Tower incorrect = getIncorrect();
-		for (int i = 0; i < this.children.size() - 3; i++) {
+		for (int i = 0; i < this.children.size(); i++) {
 			Tower t1 = this.children.get(i);
 			if (!t1.equals(incorrect)) {
 				return t1;

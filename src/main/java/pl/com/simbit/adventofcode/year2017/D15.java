@@ -12,8 +12,8 @@ public class D15 implements Day {
 	public static final BigInteger MOD = BigInteger.valueOf(2147483647);
 	public static final BigInteger MODA = BigInteger.valueOf(4);
 	public static final BigInteger MODB = BigInteger.valueOf(8);
-	private BigInteger startA = BigInteger.valueOf(618);
-	private BigInteger startB = BigInteger.valueOf(814);
+	private BigInteger startA = BigInteger.valueOf(679);
+	private BigInteger startB = BigInteger.valueOf(771);
 
 	@Override
 	public Object problem1() {

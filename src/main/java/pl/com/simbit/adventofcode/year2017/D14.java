@@ -6,7 +6,7 @@ import pl.com.simbit.utility.string.StringUtils;
 
 public class D14 implements Day {
 
-	private String input = "vbqugkhl";
+	private String input = "ljoxqyyw";
 
 	@Override
 	public Object problem1() {

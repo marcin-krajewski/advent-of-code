@@ -118,7 +118,7 @@ public class D21 implements Day {
 					return flips.get(option);
 				}
 			}
-			throw new RuntimeException("Not found option!");
+			throw new RuntimeException("Not found option! " + flips);
 		}
 
 		private Set<String> flipOptions(String[][] subarray) {

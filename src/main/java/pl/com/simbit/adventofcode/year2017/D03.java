@@ -9,7 +9,7 @@ public class D03 implements Day {
 	}
 
 	private Object solve(ValueGetter valueGetter) {
-		int search = 277678;
+		int search = 265149;
 		int[][] values = new int[600][600];
 
 		int x = 300, y = 300;

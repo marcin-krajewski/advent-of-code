@@ -7,7 +7,7 @@ import java.util.List;
 
 public class D17 implements Day {
 
-	private int steps = 394;
+	private int steps = 367;
 
 	@Override
 	public Object problem1() {

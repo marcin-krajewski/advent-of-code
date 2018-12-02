@@ -69,7 +69,8 @@
     "problem2": 10150888
   },
   "D18": {
-    "problem1": "4601"
+    "problem1": "4601",
+    "problem2": ""
   },
   "D19": {
     "problem1": "LIWQYKMRP",
@@ -91,6 +92,10 @@
     "problem1": 8281
   },
   "D24": {
+    "problem1": 1859,
+    "problem2": 1799
+  },
+  "D25": {
     "problem1": 1859,
     "problem2": 1799
   }
